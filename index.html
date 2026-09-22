@@ -4,23 +4,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para ti · Una pequeña historia</title>
+<title>Para Milena ✨</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+:root{
+    --gold:#e9c878;
+    --gold2:#fff0b0;
+    --cream:#fff8e8;
+    --dark:#04020a;
+    --purple:#160b22;
+    --pink:#d88ca5;
+}
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#030308;
-    color:#fff;
+    background:#04020a;
+    color:white;
     font-family:'Montserrat',sans-serif;
 }
 
@@ -28,338 +39,278 @@ body{
     cursor:default;
 }
 
-/* =========================
-   FONDO
-========================= */
-
-#particles{
+#galaxy{
     position:fixed;
     inset:0;
     width:100%;
     height:100%;
-    pointer-events:none;
-    z-index:1;
+    z-index:0;
 }
 
-.ambient{
+.vignette{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at center,
+        transparent 25%,
+        rgba(0,0,0,.18) 55%,
+        rgba(0,0,0,.72) 100%);
+}
+
+#flowers{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:2;
-    background:
-        radial-gradient(circle at 50% 45%,rgba(212,175,55,.10),transparent 28%),
-        radial-gradient(circle at 15% 20%,rgba(255,215,90,.05),transparent 30%),
-        radial-gradient(circle at 85% 80%,rgba(212,175,55,.05),transparent 30%);
+    z-index:3;
+    overflow:hidden;
 }
 
-/* =========================
-   CAPAS
-========================= */
+.flower{
+    position:absolute;
+    width:80px;
+    opacity:.72;
+    filter:drop-shadow(0 0 12px rgba(255,214,91,.35));
+    animation:floatFlower linear infinite;
+}
+
+@keyframes floatFlower{
+    from{
+        transform:translateY(110vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(-130px) rotate(360deg);
+    }
+}
 
 .layer{
     position:fixed;
     inset:0;
-    display:flex;
+    z-index:5;
+    display:none;
     align-items:center;
     justify-content:center;
-    flex-direction:column;
-    padding:30px;
-    opacity:0;
-    visibility:hidden;
-    transform:scale(1.035);
-    transition:
-        opacity 1s ease,
-        transform 1.1s cubic-bezier(.22,1,.36,1),
-        visibility 1s;
-    z-index:10;
+    padding:25px;
     text-align:center;
+    opacity:0;
 }
 
 .layer.active{
-    opacity:1;
-    visibility:visible;
-    transform:scale(1);
+    display:flex;
+    animation:layerIn .9s ease forwards;
 }
 
-.layer.exit{
-    opacity:0;
-    transform:scale(.96);
+.layer.leaving{
+    display:flex;
+    animation:layerOut .55s ease forwards;
 }
 
-/* =========================
-   DECORACIÓN
-========================= */
-
-.gold-line{
-    width:80px;
-    height:1px;
-    background:linear-gradient(90deg,transparent,#d4af37,transparent);
-    margin:22px auto;
+@keyframes layerIn{
+    from{
+        opacity:0;
+        transform:scale(1.035);
+        filter:blur(8px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
 }
 
-.kicker{
-    font-size:10px;
-    letter-spacing:5px;
+@keyframes layerOut{
+    from{
+        opacity:1;
+        transform:scale(1);
+    }
+    to{
+        opacity:0;
+        transform:scale(.97);
+        filter:blur(8px);
+    }
+}
+
+.content{
+    position:relative;
+    z-index:10;
+    max-width:1000px;
+    width:100%;
+}
+
+.eyebrow{
+    color:var(--gold);
+    letter-spacing:6px;
     text-transform:uppercase;
-    color:#d4af37;
-    margin-bottom:18px;
+    font-size:11px;
+    margin-bottom:22px;
 }
 
-h1,h2{
-    font-family:'Cormorant Garamond',serif;
-    font-weight:400;
+.title{
+    font-family:'Cinzel',serif;
+    font-size:clamp(42px,9vw,105px);
+    font-weight:500;
+    letter-spacing:7px;
+    text-shadow:0 0 35px rgba(233,200,120,.25);
 }
 
-.big-title{
-    font-size:clamp(55px,11vw,130px);
-    line-height:.85;
-    letter-spacing:-4px;
-    background:linear-gradient(
-        120deg,
-        #fff,
-        #d4af37 45%,
-        #fff
-    );
-    -webkit-background-clip:text;
-    color:transparent;
-    text-shadow:0 0 45px rgba(212,175,55,.15);
+.script{
+    font-family:'Great Vibes',cursive;
+    color:var(--gold2);
+    font-size:clamp(40px,8vw,80px);
 }
 
 .subtitle{
     max-width:650px;
-    font-size:13px;
-    line-height:2;
-    letter-spacing:2px;
-    color:rgba(255,255,255,.68);
+    margin:20px auto 0;
+    color:rgba(255,255,255,.75);
+    font-size:14px;
+    line-height:1.9;
+    font-weight:300;
 }
 
-/* =========================
-   BOTONES
-========================= */
+.gold-line{
+    width:90px;
+    height:1px;
+    margin:28px auto;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
 
 .btn{
-    margin-top:35px;
-    padding:15px 35px;
-    border:1px solid rgba(212,175,55,.55);
-    background:rgba(0,0,0,.35);
-    color:#f5d978;
+    border:1px solid rgba(233,200,120,.6);
+    background:rgba(10,5,16,.65);
+    color:var(--cream);
+    padding:14px 28px;
+    border-radius:50px;
     font-family:'Montserrat',sans-serif;
-    font-size:10px;
-    letter-spacing:4px;
+    letter-spacing:2px;
+    font-size:11px;
     text-transform:uppercase;
     cursor:pointer;
-    transition:.4s ease;
+    transition:.3s ease;
     backdrop-filter:blur(10px);
 }
 
 .btn:hover{
-    background:#d4af37;
-    color:#050505;
-    box-shadow:0 0 35px rgba(212,175,55,.25);
+    background:rgba(233,200,120,.12);
+    box-shadow:0 0 25px rgba(233,200,120,.2);
     transform:translateY(-2px);
 }
 
-/* =========================
-   AUDIO
-========================= */
-
-.audio{
-    position:fixed;
-    top:20px;
-    right:20px;
-    z-index:100;
-    border:1px solid rgba(212,175,55,.3);
-    background:rgba(0,0,0,.45);
-    backdrop-filter:blur(12px);
-    padding:10px 15px;
-    color:#d4af37;
-    font-size:9px;
-    letter-spacing:2px;
-    cursor:pointer;
-    opacity:.8;
-    transition:.3s;
+.btn.gold{
+    background:linear-gradient(135deg,#c99e43,#f4d681);
+    color:#201307;
+    border:none;
+    font-weight:600;
 }
 
-.audio:hover{
-    opacity:1;
-}
-
-/* =========================
-   INDICADOR
-========================= */
-
-.counter{
-    position:fixed;
-    bottom:22px;
+.tap{
+    position:absolute;
+    bottom:30px;
     left:50%;
     transform:translateX(-50%);
-    z-index:100;
-    font-size:9px;
-    letter-spacing:4px;
-    color:rgba(255,255,255,.4);
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.45);
 }
 
-.progress{
-    position:fixed;
-    bottom:0;
-    left:0;
-    height:2px;
-    width:0;
-    background:#d4af37;
-    z-index:101;
-    transition:width 1s ease;
-}
-
-/* =========================
-   FLORES
-========================= */
-
-.flower{
-    position:fixed;
-    width:130px;
-    pointer-events:none;
-    z-index:5;
-    opacity:.85;
-    filter:drop-shadow(0 0 12px rgba(212,175,55,.18));
-    animation:floatFlower 7s ease-in-out infinite;
-}
-
-.f1{
-    left:-15px;
-    top:5%;
-    transform:rotate(-15deg);
-}
-
-.f2{
-    right:-20px;
-    top:12%;
-    width:145px;
-    transform:rotate(18deg);
-    animation-delay:1.5s;
-}
-
-.f3{
-    left:2%;
-    bottom:-20px;
-    width:150px;
-    transform:rotate(15deg);
-    animation-delay:3s;
-}
-
-.f4{
-    right:1%;
-    bottom:-15px;
-    width:140px;
-    transform:rotate(-12deg);
-    animation-delay:4s;
-}
-
-@keyframes floatFlower{
-    0%,100%{translate:0 0}
-    50%{translate:0 -12px}
-}
-
-/* =========================
-   SOBRE
-========================= */
-
+/* SOBRE */
 .envelope{
-    width:min(330px,80vw);
-    height:220px;
+    width:min(430px,88vw);
+    height:280px;
+    margin:30px auto;
     position:relative;
+    perspective:1000px;
     cursor:pointer;
-    perspective:800px;
-    margin-bottom:30px;
 }
 
 .envelope-body{
     position:absolute;
     inset:0;
-    background:linear-gradient(145deg,#17140c,#090806);
-    border:1px solid rgba(212,175,55,.45);
-    box-shadow:0 20px 70px rgba(0,0,0,.7);
+    background:linear-gradient(145deg,#302016,#0f0a0c);
+    border:1px solid rgba(233,200,120,.5);
+    box-shadow:0 25px 70px rgba(0,0,0,.55),
+               0 0 40px rgba(233,200,120,.08);
 }
 
-.envelope-body:before,
-.envelope-body:after{
-    content:"";
+.envelope-flap{
     position:absolute;
-    width:1px;
-    height:100%;
-    background:rgba(212,175,55,.25);
+    left:0;
     top:0;
+    width:100%;
+    height:55%;
+    background:linear-gradient(145deg,#4a3320,#171014);
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top;
+    transition:1s ease;
+    z-index:3;
+    border-top:1px solid rgba(255,255,255,.08);
 }
 
-.envelope-body:before{
-    left:50%;
-    transform:rotate(57deg);
-    transform-origin:center;
-}
-
-.envelope-body:after{
-    left:50%;
-    transform:rotate(-57deg);
-    transform-origin:center;
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
 }
 
 .seal{
     position:absolute;
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:#d4af37;
-    color:#171108;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'Cormorant Garamond',serif;
-    font-size:25px;
+    z-index:5;
     left:50%;
-    top:50%;
+    top:52%;
     transform:translate(-50%,-50%);
-    box-shadow:0 0 35px rgba(212,175,55,.25);
-    z-index:3;
-}
-
-.envelope.open .seal{
-    transform:translate(-50%,-50%) scale(0);
-    opacity:0;
-    transition:.6s;
-}
-
-/* =========================
-   FOTO / GALERÍA
-========================= */
-
-.photo-stage{
-    width:min(390px,82vw);
-    height:min(530px,65vh);
-    position:relative;
+    width:62px;
+    height:62px;
+    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
+    background:radial-gradient(circle,#f0d47d,#a7792f);
+    color:#34220c;
+    font-family:'Great Vibes',cursive;
+    font-size:27px;
+    box-shadow:0 0 25px rgba(233,200,120,.25);
+}
+
+/* GALAXIA */
+.galaxy-card{
+    padding:35px;
+    border:1px solid rgba(233,200,120,.18);
+    background:rgba(4,2,10,.35);
+    backdrop-filter:blur(8px);
+    border-radius:24px;
+}
+
+.galaxy-title{
+    font-family:'Cinzel',serif;
+    font-size:clamp(28px,5vw,55px);
+    letter-spacing:5px;
+}
+
+/* FOTOS */
+.photo-layer{
+    flex-direction:column;
 }
 
 .photo-frame{
-    width:100%;
-    height:100%;
-    padding:10px;
-    border:1px solid rgba(212,175,55,.4);
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,.08),
-        rgba(0,0,0,.5)
-    );
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.75),
-        0 0 50px rgba(212,175,55,.08);
     position:relative;
-    transform:rotate(-2deg);
-    transition:.8s cubic-bezier(.22,1,.36,1);
+    width:min(380px,78vw);
+    height:min(500px,64vh);
+    padding:9px;
+    background:linear-gradient(145deg,#f5d980,#8b6526,#e7c66e);
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.7),
+        0 0 60px rgba(233,200,120,.12);
+    transform:rotate(-2deg) scale(.95);
+    animation:photoFloat 5s ease-in-out infinite;
+    cursor:pointer;
 }
 
-.photo-frame:hover{
-    transform:rotate(0deg) scale(1.025);
+.photo-frame::before{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(255,255,255,.55);
+    pointer-events:none;
 }
 
 .photo-frame img{
@@ -369,209 +320,175 @@ h1,h2{
     display:block;
 }
 
+@keyframes photoFloat{
+    0%,100%{transform:rotate(-2deg) translateY(0)}
+    50%{transform:rotate(2deg) translateY(-10px)}
+}
+
 .photo-number{
-    position:absolute;
-    top:-17px;
-    left:18px;
-    color:#d4af37;
-    font-size:9px;
+    margin-top:22px;
+    color:var(--gold);
+    font-family:'Cinzel',serif;
+    font-size:12px;
     letter-spacing:4px;
 }
 
-.photo-hint{
-    margin-top:25px;
-    color:rgba(255,255,255,.42);
-    font-size:9px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-}
-
-/* =========================
-   MENSAJES
-========================= */
-
 .message-box{
-    max-width:720px;
+    max-width:650px;
+    margin-top:18px;
 }
 
 .message-box h2{
-    font-size:clamp(38px,7vw,70px);
-    margin-bottom:25px;
-    color:#f5e4a5;
+    font-family:'Great Vibes',cursive;
+    color:var(--gold2);
+    font-size:42px;
+    font-weight:400;
 }
 
 .message-box p{
-    color:rgba(255,255,255,.72);
+    margin-top:10px;
+    color:rgba(255,255,255,.75);
     font-size:14px;
-    line-height:2.1;
-    max-width:650px;
-    margin:auto;
+    line-height:1.8;
 }
 
-/* =========================
-   GALAXIA
-========================= */
-
-#galaxyCanvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:-1;
-}
-
-.galaxy-content{
-    position:relative;
-    z-index:2;
-}
-
-.galaxy-title{
-    font-size:clamp(42px,8vw,90px);
-    color:#f4df91;
-    text-shadow:0 0 35px rgba(212,175,55,.25);
-}
-
-/* =========================
-   CARTA
-========================= */
-
+/* CARTA */
 .letter{
-    width:min(700px,90vw);
-    max-height:72vh;
+    width:min(650px,92vw);
+    max-height:75vh;
     overflow:auto;
-    padding:55px 45px;
+    padding:45px 35px;
     background:
-        linear-gradient(
-            145deg,
-            rgba(22,19,12,.95),
-            rgba(7,7,7,.94)
-        );
-    border:1px solid rgba(212,175,55,.32);
-    box-shadow:0 30px 100px rgba(0,0,0,.7);
-    text-align:left;
+        linear-gradient(145deg,rgba(42,27,18,.94),rgba(17,10,13,.97));
+    border:1px solid rgba(233,200,120,.3);
+    box-shadow:0 30px 100px rgba(0,0,0,.65);
+    border-radius:4px;
 }
 
 .letter::-webkit-scrollbar{
-    width:2px;
+    width:3px;
 }
 
 .letter::-webkit-scrollbar-thumb{
-    background:#d4af37;
+    background:var(--gold);
 }
 
 .letter h2{
-    color:#e9d37e;
-    font-size:42px;
-    margin-bottom:25px;
+    font-family:'Great Vibes',cursive;
+    color:var(--gold2);
+    font-size:52px;
+    font-weight:400;
 }
 
 .letter p{
-    color:rgba(255,255,255,.73);
-    line-height:2;
+    margin-top:22px;
+    line-height:1.9;
+    color:rgba(255,255,255,.76);
     font-size:14px;
-    margin-bottom:20px;
 }
 
 .signature{
-    text-align:right;
-    color:#d4af37;
-    font-family:'Cormorant Garamond',serif;
-    font-size:27px;
     margin-top:35px;
+    font-family:'Great Vibes',cursive;
+    color:var(--gold);
+    font-size:32px;
 }
 
-/* =========================
-   FINAL
-========================= */
+/* JUEGO */
+.question-card{
+    width:min(650px,92vw);
+    padding:45px 30px;
+    border:1px solid rgba(233,200,120,.25);
+    background:rgba(8,4,13,.65);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+}
 
+.question-card h2{
+    font-family:'Cinzel',serif;
+    font-size:clamp(25px,5vw,42px);
+    letter-spacing:2px;
+}
+
+.options{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+#thinkBtn{
+    position:relative;
+}
+
+/* FINAL */
 .final-title{
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(75px,16vw,190px);
-    line-height:.8;
-    color:#f4d875;
-    letter-spacing:-6px;
+    font-family:'Great Vibes',cursive;
+    color:var(--gold2);
+    font-size:clamp(65px,14vw,145px);
+    font-weight:400;
     text-shadow:
-        0 0 35px rgba(212,175,55,.25),
-        0 0 100px rgba(212,175,55,.1);
+        0 0 15px rgba(255,225,130,.35),
+        0 0 60px rgba(233,200,120,.15);
 }
 
 .final-small{
-    margin-top:35px;
-    max-width:600px;
-    color:rgba(255,255,255,.68);
+    font-family:'Cinzel',serif;
+    font-size:clamp(22px,4vw,38px);
+    letter-spacing:4px;
+}
+
+.final-text{
+    max-width:650px;
+    margin:25px auto;
+    color:rgba(255,255,255,.72);
+    line-height:2;
     font-size:14px;
-    line-height:2.1;
 }
 
-.final-sign{
-    margin-top:35px;
-    font-family:'Cormorant Garamond',serif;
-    font-size:30px;
-    color:#d4af37;
+/* INDICADOR */
+.progress{
+    position:fixed;
+    top:20px;
+    right:25px;
+    z-index:30;
+    font-family:'Cinzel',serif;
+    font-size:10px;
+    letter-spacing:3px;
+    color:rgba(255,255,255,.45);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.music{
+    position:fixed;
+    top:18px;
+    left:20px;
+    z-index:30;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    border:1px solid rgba(233,200,120,.35);
+    background:rgba(0,0,0,.3);
+    color:var(--gold);
+    cursor:pointer;
+}
 
 @media(max-width:600px){
-
-    .layer{
-        padding:20px;
-    }
-
-    .big-title{
-        letter-spacing:-2px;
-    }
-
-    .subtitle{
-        font-size:11px;
-        line-height:1.8;
-    }
-
-    .flower{
-        width:85px;
-    }
-
-    .f2{
-        width:90px;
-    }
-
-    .f3{
-        width:100px;
-    }
-
-    .f4{
-        width:90px;
-    }
-
-    .photo-stage{
-        width:min(320px,82vw);
-        height:min(450px,61vh);
-    }
-
-    .message-box p{
-        font-size:12px;
-        line-height:1.9;
+    .photo-frame{
+        width:72vw;
+        height:54vh;
     }
 
     .letter{
-        padding:35px 25px;
+        padding:35px 23px;
     }
 
-    .letter h2{
-        font-size:34px;
+    .flower{
+        width:55px;
     }
 
-    .letter p{
-        font-size:12px;
-        line-height:1.9;
-    }
-
-    .audio{
-        top:12px;
-        right:12px;
-        padding:8px 10px;
+    .subtitle{
+        font-size:13px;
     }
 }
 </style>
@@ -580,812 +497,807 @@ h1,h2{
 
 <body>
 
-<canvas id="particles"></canvas> <canvas id="galaxyCanvas"></canvas>
+<canvas id="galaxy"></canvas>
 
-<div class="ambient"></div>
+<div class="vignette"></div>
 
-<!-- FLORES -->
+<div id="flowers"></div>
 
-<img src="4.png" class="flower f1">
-<img src="5.png" class="flower f2">
-<img src="6.png" class="flower f3">
-<img src="7.png" class="flower f4">
+<div class="progress">
+    <span id="current">01</span> / 17
+</div>
 
-<!-- AUDIO -->
+<button class="music" id="musicBtn">♫</button>
 
-<div class="audio" id="audioButton">♫ TALISMAN · OFF</div>
-<audio id="music" src="talisman.mp3" loop preload="auto"></audio>
+<audio id="music" loop preload="auto">
+    <source src="talisman.mp3" type="audio/mpeg">
+</audio>
 
-<!-- =========================
-     01 INTRO
-========================= -->
+<!-- 01 INTRO -->
 
 <section class="layer active" id="layer1">
+    <div class="content">
+        <div class="eyebrow">Una pequeña sorpresa</div>
 
 ```
-<div class="kicker">PRIVATE EXPERIENCE · 001</div>
-
-<h1 class="big-title">
-    Para ti.
-</h1>
-
-<div class="gold-line"></div>
-
-<p class="subtitle">
-    No es una página cualquiera.<br>
-    Es una pequeña historia que quería regalarte.
-</p>
-
-<button class="btn" onclick="startExperience()">
-    Abrir experiencia
-</button>
-```
-
-</section>
-
-<!-- =========================
-     02 SOBRE
-========================= -->
-
-<section class="layer" id="layer2">
-
-```
-<div class="kicker">UNA PEQUEÑA SORPRESA</div>
-
-<div class="envelope" id="envelope" onclick="openEnvelope()">
-    <div class="envelope-body"></div>
-    <div class="seal">J</div>
-</div>
-
-<p class="subtitle">
-    Hay cosas que se disfrutan más cuando se descubren poco a poco.
-</p>
-```
-
-</section>
-
-<!-- =========================
-     03 SOBRE TI
-========================= -->
-
-<section class="layer" id="layer3">
-
-```
-<div class="kicker">ANTES DE EMPEZAR</div>
-
-<h1 class="galaxy-title">
-    Hay personas...
-</h1>
-
-<div class="gold-line"></div>
-
-<p class="subtitle">
-    que llegan sin hacer demasiado ruido,<br>
-    pero terminan despertando curiosidad.
-</p>
-
-<button class="btn" onclick="nextLayer()">
-    Continuar
-</button>
-```
-
-</section>
-
-<!-- =========================
-     04 GALAXIA
-========================= -->
-
-<section class="layer" id="layer4">
-
-```
-<div class="galaxy-content">
-
-    <div class="kicker">UN PEQUEÑO UNIVERSO</div>
-
-    <h1 class="galaxy-title">
-        Algunas personas<br>
-        cambian el paisaje.
-    </h1>
+    <div class="title">MILENA</div>
 
     <div class="gold-line"></div>
+
+    <div class="script">Esto es para ti</div>
 
     <p class="subtitle">
-        Y de repente una sonrisa, una conversación<br>
-        o una mirada empieza a significar un poquito más.
+        No es una declaración exagerada.<br>
+        Tampoco una historia que quiera correr demasiado rápido.
+        Es simplemente una pequeña forma de decirte que hay alguien
+        que disfruta mucho conocerte.
     </p>
 
-    <button class="btn" onclick="nextLayer()">
-        Seguir
-    </button>
+    <br>
 
+    <button class="btn gold" onclick="startExperience()">
+        Abrir sorpresa
+    </button>
+</div>
+
+<div class="tap">Haz clic para comenzar</div>
+```
+
+</section>
+
+<!-- 02 SOBRE -->
+
+<section class="layer" id="layer2">
+    <div class="content">
+        <div class="eyebrow">Capítulo 01</div>
+        <div class="script">Para Milena</div>
+
+```
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+        <div class="envelope-body"></div>
+        <div class="envelope-flap"></div>
+        <div class="seal">M</div>
+    </div>
+
+    <p class="subtitle">
+        Hay cosas que se disfrutan más cuando se descubren poco a poco.
+    </p>
 </div>
 ```
 
 </section>
 
-<!-- =========================
-     FOTO 1
-========================= -->
+<!-- 03 GALAXIA -->
+
+<section class="layer" id="layer3">
+    <div class="content">
+        <div class="galaxy-card">
+            <div class="eyebrow">Capítulo 02</div>
+
+```
+        <div class="galaxy-title">
+            Entre millones de estrellas...
+        </div>
+
+        <div class="gold-line"></div>
+
+        <p class="subtitle">
+            algunas personas simplemente consiguen llamar
+            nuestra atención de una manera diferente.
+        </p>
+
+        <br>
+
+        <button class="btn gold" onclick="goNext()">
+            Seguir
+        </button>
+    </div>
+</div>
+```
+
+</section>
+
+<!-- 04 FOTO 1 -->
+
+<section class="layer photo-layer" id="layer4">
+    <div class="photo-frame" onclick="goNext()">
+        <img src="mi1.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 01</div>
+    <div class="tap">Toca la fotografía</div>
+</section>
+
+<!-- 05 MENSAJE 1 -->
 
 <section class="layer" id="layer5">
-
-```
-<div class="photo-stage">
-
-    <div class="photo-frame">
-        <span class="photo-number">MOMENTO · 01</span>
-        <img src="mi1.jpg">
+    <div class="content">
+        <div class="eyebrow">01 · Una mirada</div>
+        <div class="message-box">
+            <h2>Hay miradas...</h2>
+            <p>
+                que no necesitan demasiadas palabras.
+                A veces basta con ver a una persona y sentir
+                que quieres conocer un poco más de ella.
+            </p>
+        </div>
+        <br>
+        <button class="btn" onclick="goNext()">Continuar</button>
     </div>
-
-</div>
-
-<div class="photo-hint">
-    Toca la foto para descubrir algo
-</div>
-```
-
 </section>
 
-<!-- =========================
-     MENSAJE 1
-========================= -->
+<!-- 06 FOTO 2 -->
 
-<section class="layer" id="layer6">
-
-```
-<div class="message-box">
-
-    <div class="kicker">PARA TI · 01</div>
-
-    <h2>Hay miradas...</h2>
-
-    <div class="gold-line"></div>
-
-    <p>
-        que no necesitan demasiadas palabras.
-        A veces basta con ver a una persona y sentir
-        que quieres conocer un poco más de ella.
-    </p>
-
-</div>
-
-<button class="btn" onclick="nextLayer()">Continuar</button>
-```
-
+<section class="layer photo-layer" id="layer6">
+    <div class="photo-frame" style="transform:rotate(2deg)" onclick="goNext()">
+        <img src="mi2.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 02</div>
+    <div class="tap">Toca la fotografía</div>
 </section>
 
-<!-- =========================
-     FOTO 2
-========================= -->
+<!-- 07 MENSAJE 2 -->
 
 <section class="layer" id="layer7">
-
-```
-<div class="photo-stage">
-
-    <div class="photo-frame">
-        <span class="photo-number">MOMENTO · 02</span>
-        <img src="mi2.jpg">
+    <div class="content">
+        <div class="eyebrow">02 · Sin hacer ruido</div>
+        <div class="message-box">
+            <h2>Hay personas...</h2>
+            <p>
+                que aparecen sin hacer demasiado ruido,
+                pero terminan dejando una pequeña huella
+                en tus pensamientos.
+            </p>
+        </div>
+        <br>
+        <button class="btn" onclick="goNext()">Continuar</button>
     </div>
-
-</div>
-
-<div class="photo-hint">
-    Hay otra historia detrás de esta imagen
-</div>
-```
-
 </section>
 
-<!-- =========================
-     MENSAJE 2
-========================= -->
+<!-- 08 FOTO 3 -->
 
-<section class="layer" id="layer8">
-
-```
-<div class="message-box">
-
-    <div class="kicker">PARA TI · 02</div>
-
-    <h2>Hay personas...</h2>
-
-    <div class="gold-line"></div>
-
-    <p>
-        que aparecen sin hacer demasiado ruido,
-        pero terminan dejando una pequeña huella
-        en tus pensamientos.
-    </p>
-
-</div>
-
-<button class="btn" onclick="nextLayer()">Continuar</button>
-```
-
+<section class="layer photo-layer" id="layer8">
+    <div class="photo-frame" style="transform:rotate(-1deg)" onclick="goNext()">
+        <img src="mi3.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 03</div>
+    <div class="tap">Toca la fotografía</div>
 </section>
 
-<!-- =========================
-     FOTO 3
-========================= -->
+<!-- 09 MENSAJE 3 -->
 
 <section class="layer" id="layer9">
-
-```
-<div class="photo-stage">
-
-    <div class="photo-frame">
-        <span class="photo-number">MOMENTO · 03</span>
-        <img src="mi3.jpg">
+    <div class="content">
+        <div class="eyebrow">03 · Poco a poco</div>
+        <div class="message-box">
+            <h2>Y entonces...</h2>
+            <p>
+                empiezas a notar detalles.
+                Una sonrisa, una conversación, una forma de mirar...
+                y algo cambia poquito a poquito.
+            </p>
+        </div>
+        <br>
+        <button class="btn" onclick="goNext()">Continuar</button>
     </div>
-
-</div>
-
-<div class="photo-hint">
-    Una más...
-</div>
-```
-
 </section>
 
-<!-- =========================
-     MENSAJE 3
-========================= -->
+<!-- 10 FOTO 4 -->
 
-<section class="layer" id="layer10">
-
-```
-<div class="message-box">
-
-    <div class="kicker">PARA TI · 03</div>
-
-    <h2>Y entonces...</h2>
-
-    <div class="gold-line"></div>
-
-    <p>
-        empiezas a notar detalles.
-        Una sonrisa, una conversación,
-        una forma de mirar...
-        y algo cambia poquito a poquito.
-    </p>
-
-</div>
-
-<button class="btn" onclick="nextLayer()">Continuar</button>
-```
-
+<section class="layer photo-layer" id="layer10">
+    <div class="photo-frame" style="transform:rotate(2deg)" onclick="goNext()">
+        <img src="mi4.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 04</div>
+    <div class="tap">Toca la fotografía</div>
 </section>
 
-<!-- =========================
-     FOTO 4
-========================= -->
+<!-- 11 MENSAJE 4 -->
 
 <section class="layer" id="layer11">
-
-```
-<div class="photo-stage">
-
-    <div class="photo-frame">
-        <span class="photo-number">MOMENTO · 04</span>
-        <img src="mi4.jpg">
+    <div class="content">
+        <div class="eyebrow">04 · Curiosidad</div>
+        <div class="message-box">
+            <h2>Me dio curiosidad...</h2>
+            <p>
+                saber qué hay detrás de esa sonrisa,
+                conocer tus historias, tus sueños
+                y esa persona que eres cuando nadie está mirando.
+            </p>
+        </div>
+        <br>
+        <button class="btn" onclick="goNext()">Continuar</button>
     </div>
-
-</div>
-
-<div class="photo-hint">
-    Todavía falta una...
-</div>
-```
-
 </section>
 
-<!-- =========================
-     MENSAJE 4
-========================= -->
+<!-- 12 FOTO 5 -->
 
-<section class="layer" id="layer12">
-
-```
-<div class="message-box">
-
-    <div class="kicker">PARA TI · 04</div>
-
-    <h2>Me dio curiosidad...</h2>
-
-    <div class="gold-line"></div>
-
-    <p>
-        saber qué hay detrás de esa sonrisa,
-        conocer tus historias, tus sueños
-        y esa persona que eres cuando nadie está mirando.
-    </p>
-
-</div>
-
-<button class="btn" onclick="nextLayer()">Una última</button>
-```
-
+<section class="layer photo-layer" id="layer12">
+    <div class="photo-frame" onclick="goNext()">
+        <img src="mi5.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 05</div>
+    <div class="tap">Toca la fotografía</div>
 </section>
 
-<!-- =========================
-     FOTO 5
-========================= -->
+<!-- 13 MENSAJE 5 -->
 
 <section class="layer" id="layer13">
-
-```
-<div class="photo-stage">
-
-    <div class="photo-frame">
-        <span class="photo-number">MOMENTO · 05</span>
-        <img src="mi5.jpg">
+    <div class="content">
+        <div class="eyebrow">05 · Detalles</div>
+        <div class="message-box">
+            <h2>Supongo que...</h2>
+            <p>
+                cuando alguien empieza a importarte,
+                hasta los pequeños detalles comienzan
+                a tener otro significado.
+            </p>
+        </div>
+        <br>
+        <button class="btn" onclick="goNext()">Continuar</button>
     </div>
-
-</div>
-
-<div class="photo-hint">
-    Esta última guarda el mensaje final
-</div>
-```
-
 </section>
 
-<!-- =========================
-     CARTA
-========================= -->
+<!-- 14 FOTO 6 -->
 
-<section class="layer" id="layer14">
+<section class="layer photo-layer" id="layer14">
+    <div class="photo-frame" style="transform:rotate(-2deg)" onclick="goNext()">
+        <img src="mi6.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 06</div>
+    <div class="tap">Una más...</div>
+</section>
+
+<!-- 15 FOTO 7 -->
+
+<section class="layer photo-layer" id="layer15">
+    <div class="photo-frame" style="transform:rotate(2deg)" onclick="goNext()">
+        <img src="mi7.jpg" alt="Milena">
+    </div>
+    <div class="photo-number">MILENA · 07</div>
+    <div class="tap">La última fotografía</div>
+</section>
+
+<!-- 16 CARTA -->
+
+<section class="layer" id="layer16">
+    <div class="letter">
+        <div class="eyebrow">Una pequeña carta</div>
 
 ```
-<div class="letter">
-
-    <div class="kicker">UNA CARTA PARA TI</div>
-
-    <h2>Algo comenzó aquí...</h2>
+    <h2>Milena...</h2>
 
     <p>
-        No fue una fecha ni un momento perfecto.
-        Fue simplemente esa sensación de querer saber
-        un poco más de ti, de encontrar una razón
-        para sonreír cuando apareces.
+        No sé exactamente en qué momento empezaste
+        a llamar mi atención de esta manera.
     </p>
 
     <p>
-        Hay sonrisas que duran segundos,
-        pero dejan algo que permanece.
-        La tuya tiene esa extraña manera
-        de hacer que cualquier momento parezca
-        un poquito más bonito.
+        Primero fueron pequeños detalles.
+        Después las ganas de hablar contigo.
+        Y poco a poco apareció esa curiosidad bonita
+        de querer conocerte mucho más.
     </p>
 
     <p>
-        Primero fueron pequeños detalles,
-        después ganas de hablar contigo y,
-        cuando quise darme cuenta,
-        ya había una persona que empezaba
-        a importarme más de lo que imaginaba.
+        No quiero adelantar una historia que recién comienza.
+        Prefiero disfrutar cada conversación,
+        cada sonrisa y cada momento.
     </p>
 
     <p>
-        No quiero correr ni ponerle nombre
-        a algo que recién comienza.
-        Solo quiero seguir conociéndote,
-        compartir momentos y descubrir
-        qué puede nacer de todo esto.
+        Solo quería que supieras que hay alguien
+        que te mira con muchísimo cariño
+        y que disfruta cada vez más descubrir
+        quién es Milena.
     </p>
 
     <div class="signature">
         Sin prisa.
     </div>
 
-</div>
+    <br>
 
-<button class="btn" onclick="nextLayer()">Hay algo más</button>
-```
-
-</section>
-
-<!-- =========================
-     FINAL
-========================= -->
-
-<section class="layer" id="layer15">
-
-```
-<div class="kicker">THE END · OR MAYBE THE BEGINNING</div>
-
-<div class="final-title">
-    ME GUSTAS.
-</div>
-
-<div class="gold-line"></div>
-
-<p class="final-small">
-    Y mucho.<br><br>
-
-    No sé qué pasará mañana.
-    No quiero adelantar una historia que recién comienza.
-    Solo sé que me gustas, que disfruto tenerte cerca
-    y que me gustaría seguir conquistándote,
-    poco a poco.
-</p>
-
-<div class="final-sign">
-    Para ti · J
+    <button class="btn gold" onclick="goNext()">
+        Hay una última cosa...
+    </button>
 </div>
 ```
 
 </section>
 
-<div class="counter" id="counter">01 / 15</div>
-<div class="progress" id="progress"></div>
+<!-- 17 JUEGO -->
+
+<section class="layer" id="layer17">
+    <div class="question-card">
+        <div class="eyebrow">La pregunta importante</div>
+
+```
+    <h2>
+        ¿Y si seguimos<br>
+        conociéndonos?
+    </h2>
+
+    <p class="subtitle">
+        Prometo no correr demasiado... 😌
+    </p>
+
+    <div class="options">
+        <button class="btn gold" onclick="finalYes()">
+            Sí ✨
+        </button>
+
+        <button class="btn" id="thinkBtn">
+            Déjame pensarlo 😂
+        </button>
+    </div>
+</div>
+```
+
+</section>
+
+<!-- FINAL -->
+
+<section class="layer" id="finalLayer">
+    <div class="content">
+        <div class="eyebrow">Y eso era todo...</div>
+
+```
+    <div class="final-title">
+        Milena
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="final-small">
+        ME GUSTAS.
+    </div>
+
+    <p class="final-text">
+        Y mucho.<br><br>
+
+        No sé qué pasará mañana.
+        No quiero adelantar una historia que recién comienza.
+        Solo sé que me gustas, que disfruto tenerte cerca
+        y que me gustaría seguir conquistándote,
+        poco a poco.
+    </p>
+
+    <div class="script">
+        Sin prisa ✨
+    </div>
+</div>
+```
+
+</section>
 
 <script>
-
-/* =========================================
-   CONFIGURACIÓN
-========================================= */
+/* =========================
+   NAVEGACIÓN
+========================= */
 
 let currentLayer = 1;
-const totalLayers = 15;
+const totalLayers = 17;
 
 const music = document.getElementById("music");
-const audioButton = document.getElementById("audioButton");
-const counter = document.getElementById("counter");
-const progress = document.getElementById("progress");
-
-/* =========================================
-   MÚSICA
-========================================= */
-
-function startMusic(){
-
-    music.volume = 0.45;
-
-    const promise = music.play();
-
-    if(promise !== undefined){
-
-        promise.catch(()=>{
-            console.log("El navegador bloqueó el autoplay.");
-        });
-
-    }
-
-    audioButton.innerText = "♫ TALISMAN · ON";
-}
-
-function toggleMusic(){
-
-    if(music.paused){
-
-        music.play().catch(()=>{});
-        audioButton.innerText = "♫ TALISMAN · ON";
-
-    }else{
-
-        music.pause();
-        audioButton.innerText = "♫ TALISMAN · OFF";
-
-    }
-
-}
-
-audioButton.addEventListener("click",toggleMusic);
-
-/* =========================================
-   CAMBIO DE CAPAS
-========================================= */
-
-function showLayer(number){
-
-    document.querySelectorAll(".layer").forEach(layer=>{
-        layer.classList.remove("active");
-    });
-
-    const next = document.getElementById("layer"+number);
-
-    if(next){
-        next.classList.add("active");
-    }
-
-    currentLayer = number;
-
-    counter.innerText =
-        String(number).padStart(2,"0")
-        + " / "
-        + String(totalLayers).padStart(2,"0");
-
-    progress.style.width =
-        ((number-1)/(totalLayers-1))*100 + "%";
-
-}
-
-function nextLayer(){
-
-    if(currentLayer < totalLayers){
-
-        showLayer(currentLayer + 1);
-
-    }
-
-}
-
-/* =========================================
-   INICIO
-========================================= */
+const musicBtn = document.getElementById("musicBtn");
 
 function startExperience(){
-
-    startMusic();
-
-    showLayer(2);
-
+    music.volume = 0.55;
+    music.play().catch(()=>{});
+    goNext();
 }
 
-/* =========================================
-   SOBRE
-========================================= */
+function showLayer(next){
+    const oldLayer = document.getElementById(
+        "layer" + currentLayer
+    );
 
-function openEnvelope(){
+    const newLayer = document.getElementById(
+        next === "final" ? "finalLayer" : "layer" + next
+    );
 
-    const envelope = document.getElementById("envelope");
+    if(!newLayer) return;
 
-    envelope.classList.add("open");
+    oldLayer.classList.remove("active");
+    oldLayer.classList.add("leaving");
 
     setTimeout(()=>{
+        oldLayer.classList.remove("leaving");
+        newLayer.classList.add("active");
+    },500);
 
-        nextLayer();
-
-    },650);
-
+    if(next === "final"){
+        document.getElementById("current").textContent = "∞";
+    }else{
+        currentLayer = next;
+        document.getElementById("current").textContent =
+            String(currentLayer).padStart(2,"0");
+    }
 }
 
-/* =========================================
-   CLICK EN FOTOS
-========================================= */
+function goNext(){
+    if(currentLayer < totalLayers){
+        showLayer(currentLayer + 1);
+    }
+}
 
-document.querySelectorAll(".photo-frame").forEach(frame=>{
+function goBack(){
+    if(currentLayer > 1){
+        showLayer(currentLayer - 1);
+    }
+}
 
-    frame.addEventListener("click",()=>{
+/* SOBRE */
 
-        nextLayer();
+let envelopeOpened = false;
 
-    });
+function openEnvelope(){
+    if(envelopeOpened) return;
 
+    envelopeOpened = true;
+
+    document.getElementById("envelope")
+        .classList.add("open");
+
+    setTimeout(()=>{
+        goNext();
+    },1100);
+}
+
+/* BOTÓN DE MÚSICA */
+
+musicBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+
+    if(music.paused){
+        music.play().catch(()=>{});
+        musicBtn.textContent = "♫";
+    }else{
+        music.pause();
+        musicBtn.textContent = "Ⅱ";
+    }
 });
 
-/* =========================================
+/* =========================
+   BOTÓN "DÉJAME PENSARLO"
+========================= */
+
+const thinkBtn = document.getElementById("thinkBtn");
+
+let thinkCount = 0;
+
+thinkBtn.addEventListener("mouseenter",moveThinkButton);
+thinkBtn.addEventListener("touchstart",moveThinkButton);
+
+function moveThinkButton(){
+
+    thinkCount++;
+
+    if(thinkCount <= 4){
+
+        const x =
+            (Math.random() * 180) - 90;
+
+        const y =
+            (Math.random() * 100) - 50;
+
+        thinkBtn.style.transform =
+            `translate(${x}px,${y}px)`;
+    }else{
+
+        thinkBtn.textContent =
+            "Bueno... está bien 😂";
+
+        thinkBtn.style.transform =
+            "translate(0,0)";
+
+        thinkBtn.onclick = finalYes;
+    }
+}
+
+/* =========================
+   FINAL
+========================= */
+
+function finalYes(){
+
+    showLayer("final");
+
+    createConfetti();
+}
+
+/* =========================
+   CONFETTI DORADO
+========================= */
+
+function createConfetti(){
+
+    for(let i=0;i<100;i++){
+
+        const piece = document.createElement("div");
+
+        piece.style.position = "fixed";
+        piece.style.left = "50%";
+        piece.style.top = "50%";
+        piece.style.width = "5px";
+        piece.style.height = "9px";
+        piece.style.background =
+            Math.random() > .5 ? "#e9c878" : "#fff0b0";
+        piece.style.zIndex = "50";
+        piece.style.pointerEvents = "none";
+
+        document.body.appendChild(piece);
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            150 + Math.random() * 450;
+
+        const x =
+            Math.cos(angle) * distance;
+
+        const y =
+            Math.sin(angle) * distance;
+
+        piece.animate([
+            {
+                transform:"translate(-50%,-50%) rotate(0deg)",
+                opacity:1
+            },
+            {
+                transform:
+                    `translate(${x}px,${y}px) rotate(${Math.random()*720}deg)`,
+                opacity:0
+            }
+        ],{
+            duration:1300 + Math.random()*900,
+            easing:"cubic-bezier(.15,.7,.2,1)"
+        });
+
+        setTimeout(()=>{
+            piece.remove();
+        },2300);
+    }
+}
+
+/* =========================
    TECLADO
-========================================= */
+========================= */
 
-document.addEventListener("keydown",(event)=>{
+document.addEventListener("keydown",(e)=>{
 
-    if(event.key === "ArrowRight" || event.key === "Enter"){
+    if(e.key === "ArrowRight" ||
+       e.key === "Enter"){
 
-        nextLayer();
-
-    }
-
-    if(event.key === "ArrowLeft"){
-
-        if(currentLayer > 1){
-            showLayer(currentLayer - 1);
+        if(currentLayer === 2){
+            openEnvelope();
+        }else{
+            goNext();
         }
-
     }
 
+    if(e.key === "ArrowLeft"){
+        goBack();
+    }
 });
 
-/* =========================================
-   PARTÍCULAS
-========================================= */
+/* =========================
+   FLORES
+========================= */
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+const flowerFiles = [
+    "4.png",
+    "5.png",
+    "6.png",
+    "7.png",
+    "8.png",
+    "flor.png",
+    "flor1.png",
+    "flor2.png",
+    "flor3.png",
+    "flor4.png",
+    "flor5.png",
+    "flor6.png",
+    "flor7.png"
+];
 
+const flowersContainer =
+    document.getElementById("flowers");
+
+function createFlowers(){
+
+    for(let i=0;i<16;i++){
+
+        const flower =
+            document.createElement("img");
+
+        flower.className = "flower";
+
+        flower.src =
+            flowerFiles[
+                Math.floor(
+                    Math.random()*flowerFiles.length
+                )
+            ];
+
+        flower.style.left =
+            Math.random()*100 + "%";
+
+        flower.style.animationDuration =
+            (12 + Math.random()*18) + "s";
+
+        flower.style.animationDelay =
+            (-Math.random()*20) + "s";
+
+        flower.style.opacity =
+            .35 + Math.random()*.4;
+
+        flower.style.transform =
+            `scale(${.5+Math.random()*.7})`;
+
+        flowersContainer.appendChild(flower);
+    }
+}
+
+createFlowers();
+
+/* =========================
+   GALAXIA CANVAS
+   NO DEPENDE DE LIBRERÍAS
+========================= */
+
+const canvas =
+    document.getElementById("galaxy");
+
+const ctx =
+    canvas.getContext("2d");
+
+let stars = [];
 let particles = [];
 
 function resizeCanvas(){
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width =
+        window.innerWidth *
+        Math.min(window.devicePixelRatio,1.5);
 
+    canvas.height =
+        window.innerHeight *
+        Math.min(window.devicePixelRatio,1.5);
+
+    canvas.style.width =
+        window.innerWidth + "px";
+
+    canvas.style.height =
+        window.innerHeight + "px";
+
+    ctx.setTransform(
+        Math.min(window.devicePixelRatio,1.5),
+        0,0,
+        Math.min(window.devicePixelRatio,1.5),
+        0,0
+    );
+
+    createStars();
 }
 
-resizeCanvas();
+function createStars(){
 
-window.addEventListener("resize",resizeCanvas);
+    stars = [];
 
-class Particle{
+    const amount =
+        window.innerWidth < 700 ? 900 : 1500;
 
-    constructor(){
+    for(let i=0;i<amount;i++){
 
-        this.x = Math.random()*canvas.width;
-        this.y = Math.random()*canvas.height;
-
-        this.size = Math.random()*1.6+.2;
-
-        this.speed =
-            Math.random()*.25+.05;
-
-        this.alpha =
-            Math.random()*.6+.1;
-
-        this.gold =
-            Math.random()>.75;
-
+        stars.push({
+            x:Math.random()*window.innerWidth,
+            y:Math.random()*window.innerHeight,
+            r:Math.random()*1.4,
+            a:.2+Math.random()*.8,
+            speed:.05+Math.random()*.3
+        });
     }
+}
 
-    update(){
+function drawGalaxy(){
 
-        this.y -= this.speed;
+    ctx.clearRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
 
-        if(this.y < -5){
+    /* fondo */
 
-            this.y = canvas.height+5;
-            this.x = Math.random()*canvas.width;
+    const gradient =
+        ctx.createRadialGradient(
+            window.innerWidth/2,
+            window.innerHeight/2,
+            0,
+            window.innerWidth/2,
+            window.innerHeight/2,
+            Math.max(window.innerWidth,window.innerHeight)
+        );
 
+    gradient.addColorStop(0,"#1a0d28");
+    gradient.addColorStop(.4,"#090512");
+    gradient.addColorStop(1,"#020106");
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    /* estrellas */
+
+    stars.forEach(star=>{
+
+        star.y += star.speed;
+
+        if(star.y > window.innerHeight){
+            star.y = 0;
         }
-
-    }
-
-    draw(){
 
         ctx.beginPath();
 
         ctx.arc(
-            this.x,
-            this.y,
-            this.size,
+            star.x,
+            star.y,
+            star.r,
             0,
             Math.PI*2
         );
 
         ctx.fillStyle =
-            this.gold
-            ? `rgba(212,175,55,${this.alpha})`
-            : `rgba(255,255,255,${this.alpha*.5})`;
+            `rgba(255,235,170,${star.a})`;
 
         ctx.fill();
-
-    }
-
-}
-
-for(let i=0;i<130;i++){
-
-    particles.push(new Particle());
-
-}
-
-function animateParticles(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    particles.forEach(p=>{
-
-        p.update();
-        p.draw();
-
     });
 
-    requestAnimationFrame(animateParticles);
+    /* núcleo */
 
-}
+    const cx =
+        window.innerWidth/2;
 
-animateParticles();
+    const cy =
+        window.innerHeight/2;
 
-/* =========================================
-   GALAXIA CINEMATOGRÁFICA
-========================================= */
-
-const galaxy =
-    document.getElementById("galaxyCanvas");
-
-const gctx =
-    galaxy.getContext("2d");
-
-let stars = [];
-
-function resizeGalaxy(){
-
-    galaxy.width = window.innerWidth;
-    galaxy.height = window.innerHeight;
-
-}
-
-resizeGalaxy();
-
-window.addEventListener("resize",resizeGalaxy);
-
-for(let i=0;i<900;i++){
-
-    stars.push({
-
-        angle:Math.random()*Math.PI*2,
-
-        radius:
-            Math.random()*
-            Math.max(
-                galaxy.width,
-                galaxy.height
-            ),
-
-        speed:
-            (Math.random()*.0008)+.0002,
-
-        size:
-            Math.random()*1.5+.2,
-
-        alpha:
-            Math.random()*.7+.1
-
-    });
-
-}
-
-function drawGalaxy(){
-
-    gctx.clearRect(
-        0,
-        0,
-        galaxy.width,
-        galaxy.height
-    );
-
-    const cx = galaxy.width/2;
-    const cy = galaxy.height/2;
-
-    stars.forEach(star=>{
-
-        star.angle += star.speed;
-
-        const x =
-            cx +
-            Math.cos(star.angle) *
-            star.radius;
-
-        const y =
-            cy +
-            Math.sin(star.angle) *
-            star.radius*.55;
-
-        gctx.beginPath();
-
-        gctx.arc(
-            x,
-            y,
-            star.size,
-            0,
-            Math.PI*2
+    const glow =
+        ctx.createRadialGradient(
+            cx,cy,0,
+            cx,cy,Math.min(window.innerWidth,window.innerHeight)*.38
         );
 
-        gctx.fillStyle =
-            `rgba(212,175,55,${star.alpha})`;
+    glow.addColorStop(0,"rgba(216,140,165,.13)");
+    glow.addColorStop(.3,"rgba(110,60,150,.07)");
+    glow.addColorStop(1,"rgba(0,0,0,0)");
 
-        gctx.fill();
+    ctx.fillStyle = glow;
 
-    });
+    ctx.fillRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
 
     requestAnimationFrame(drawGalaxy);
-
 }
 
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+resizeCanvas();
 drawGalaxy();
-
-/* =========================================
-   INICIALIZAR
-========================================= */
-
-showLayer(1);
-
 </script>
 
 </body>
